@@ -7,6 +7,7 @@ public class Book {
     private String title;
     private String numberISBN;
     private List<Long> autorIds;
+    private List<String> autorMails;
 
     public String getTitle() {
         return title;
@@ -30,5 +31,14 @@ public class Book {
 
     public void setAutorIds(List<Long> autorIds) {
         this.autorIds = autorIds;
+    }
+
+
+    public List<String> getAutorMails() {
+        return autorMails;
+    }
+
+    public void setAutorMails(List<String> autorMails) {
+        this.autorMails = autorMails;
     }
 }

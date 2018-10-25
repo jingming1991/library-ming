@@ -8,6 +8,8 @@ public class Magazine extends Book {
     private long id;
     private LocalDate publishDate;
 
+
+
     public long getId() {
         return id;
     }
