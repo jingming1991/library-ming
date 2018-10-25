@@ -2,19 +2,17 @@ package com.episerver.dao;
 
 import com.episerver.entity.Author;
 import com.episerver.entity.Magazine;
-import com.episerver.fileReader.IMagazineReader;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @RunWith(SpringRunner.class)
@@ -65,12 +63,10 @@ public class MagazineDaoTest extends BaseDaoTest {
         List<Magazine> withoutAuthorId = magazineDao.findByAuthorIds("123456");
         Assert.assertEquals(0, withoutAuthorId.size());
 
-
         Author karl = authorDao.findByEmail("pr-gustafsson@optivo.de").get(0);
         List<Magazine> karlMagazines = magazineDao.findByAuthorIds(karl.getId());
         Assert.assertEquals(1, karlMagazines.size());
         Assert.assertEquals("1313-4545-8875", karlMagazines.get(0).getNumberISBN());
-
 
         Author paul = authorDao.findByEmail("pr-walter@optivo.de").get(0);
         List<Magazine> paulMagazines = magazineDao.findByAuthorIds(paul.getId());
@@ -94,5 +90,4 @@ public class MagazineDaoTest extends BaseDaoTest {
         Assert.assertTrue(isbns.contains("5454-5587-3210"));
         Assert.assertTrue(isbns.contains("1313-4545-8875"));
     }
-
 }

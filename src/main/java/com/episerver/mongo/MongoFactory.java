@@ -34,7 +34,8 @@ public class MongoFactory {
                 .connectionsPerHost(500)
                 .writeConcern(WriteConcern.ACKNOWLEDGED)
                 .maxConnectionIdleTime(20 * 60 * 1000)
-                .socketTimeout(20 * 60 * 1000).build();
+                .socketTimeout(20 * 60 * 1000)
+                .build();
         return new MongoClient(mongoHostId, build);
     }
 
