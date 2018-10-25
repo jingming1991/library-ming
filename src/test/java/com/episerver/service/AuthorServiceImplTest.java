@@ -22,7 +22,7 @@ public class AuthorServiceImplTest {
 
     @Test
     public void getFromFile() {
-        String file = getClass().getClassLoader().getResource("csv/autoren.csv").getFile();
+        String file = "csv/autoren.csv";
         List<Author> authors = authorService.getFromFile(file);
         Assert.assertEquals(6, authors.size());
     }

@@ -6,7 +6,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface IAuthorDao extends PagingAndSortingRepository<Author, String> {
+public interface AuthorDao extends PagingAndSortingRepository<Author, String> {
 
     List<Author> findByEmailIn(List<String> mailList);
+    
 }

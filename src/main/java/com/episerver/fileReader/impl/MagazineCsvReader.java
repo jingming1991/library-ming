@@ -1,9 +1,7 @@
 package com.episerver.fileReader.impl;
 
 import com.episerver.entity.Magazine;
-import com.episerver.fileReader.IAuthorReader;
 import com.episerver.fileReader.IMagazineReader;
-import com.episerver.service.IMagazinesService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -43,7 +41,7 @@ public class MagazineCsvReader extends BaseReader implements IMagazineReader {
         magazine.setPublishDate(parseDate(split[3]));
         String userMails = split[2];
         String[] split1 = userMails.split(",");
-        magazine.setAutorMails(Arrays.stream(split1).collect(Collectors.toList()));
+        magazine.setAuthorMails(Arrays.stream(split1).collect(Collectors.toList()));
         return magazine;
     }
 }

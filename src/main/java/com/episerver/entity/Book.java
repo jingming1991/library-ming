@@ -10,9 +10,9 @@ public class Book {
 
     private String title;
     private String numberISBN;
-    private List<Long> autorIds;
+    private List<String> authorIds;
     @Transient
-    private List<String> autorMails;
+    private List<String> authorMails;
 
     public String getTitle() {
         return title;
@@ -30,20 +30,20 @@ public class Book {
         this.numberISBN = numberISBN == null ? null : numberISBN.trim();
     }
 
-    public List<Long> getAutorIds() {
-        return autorIds;
+    public List<String> getAuthorIds() {
+        return authorIds;
     }
 
-    public void setAutorIds(List<Long> autorIds) {
-        this.autorIds = autorIds;
+    public void setAuthorIds(List<String> authorIds) {
+        this.authorIds = authorIds;
     }
 
 
-    public List<String> getAutorMails() {
-        return autorMails;
+    public List<String> getAuthorMails() {
+        return authorMails;
     }
 
-    public void setAutorMails(List<String> autorMails) {
-        this.autorMails = autorMails;
+    public void setAuthorMails(List<String> authorMails) {
+        this.authorMails = authorMails;
     }
 }

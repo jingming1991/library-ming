@@ -1,7 +1,7 @@
 package com.episerver.service.impl;
 
 
-import com.episerver.dao.IAuthorDao;
+import com.episerver.dao.AuthorDao;
 import com.episerver.entity.Author;
 import com.episerver.fileReader.IAuthorReader;
 import com.episerver.service.IAuthorService;
@@ -19,7 +19,7 @@ public class AuthorServiceImpl implements IAuthorService {
     private IAuthorReader authorReader;
 
     @Autowired
-    private IAuthorDao dao;
+    private AuthorDao dao;
 
 
     @Override

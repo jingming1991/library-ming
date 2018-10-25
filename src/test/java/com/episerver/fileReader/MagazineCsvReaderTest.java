@@ -1,6 +1,5 @@
 package com.episerver.fileReader;
 
-import com.episerver.entity.Author;
 import com.episerver.entity.Magazine;
 import com.episerver.fileReader.impl.MagazineCsvReader;
 import org.junit.Assert;
@@ -8,8 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class MagazineCsvReaderTest {
 
@@ -29,8 +26,8 @@ public class MagazineCsvReaderTest {
         Assert.assertEquals(2006, magazine.getPublishDate().getYear(), 0.001);
         Assert.assertEquals(5, magazine.getPublishDate().getMonthValue(), 0.001);
         Assert.assertEquals(21, magazine.getPublishDate().getDayOfMonth(), 0.001);
-        Assert.assertEquals(1, magazine.getAutorMails().size());
-        Assert.assertEquals("pr-walter@optivo.de", magazine.getAutorMails().get(0));
+        Assert.assertEquals(1, magazine.getAuthorMails().size());
+        Assert.assertEquals("pr-walter@optivo.de", magazine.getAuthorMails().get(0));
         Assert.assertEquals("Schöner kochen", magazine.getTitle());
         Assert.assertEquals("5454-5587-3210", magazine.getNumberISBN());
     }

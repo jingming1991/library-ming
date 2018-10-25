@@ -1,8 +1,8 @@
 package com.episerver.mongo;
 
 
-import com.episerver.dao.IAuthorDao;
-import com.episerver.dao.IMagazineDao;
+import com.episerver.dao.AuthorDao;
+import com.episerver.dao.MagazineDao;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.WriteConcern;
@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.support.MongoRepositoryFactory;
 
+@Configuration
 @EnableAutoConfiguration
 @Lazy
 public class MongoFactory {
@@ -46,12 +48,12 @@ public class MongoFactory {
     }
 
     @Bean
-    public IAuthorDao professionalDao(@Qualifier("MongoRepositoryFactory")MongoRepositoryFactory factory) {
-        return factory.getRepository(IAuthorDao.class);
+    public AuthorDao authorDao(@Qualifier("MongoRepositoryFactory") MongoRepositoryFactory factory) {
+        return factory.getRepository(AuthorDao.class);
     }
 
     @Bean
-    public IMagazineDao projectDao(@Qualifier("MongoRepositoryFactory")MongoRepositoryFactory factory) {
-        return factory.getRepository(IMagazineDao.class);
+    public MagazineDao magazineDao(@Qualifier("MongoRepositoryFactory") MongoRepositoryFactory factory) {
+        return factory.getRepository(MagazineDao.class);
     }
 }
