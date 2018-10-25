@@ -1,0 +1,3 @@
+mongo:
+  host: localhost:27017
+  dbName: librarySystem

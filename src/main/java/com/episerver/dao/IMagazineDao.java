@@ -1,4 +1,7 @@
 package com.episerver.dao;
 
-public interface IMagazineDao {
+import com.episerver.entity.Magazine;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface IMagazineDao extends PagingAndSortingRepository<Magazine, String> {
 }

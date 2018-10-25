@@ -1,20 +1,28 @@
 package com.episerver.entity;
 
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Author {
-    private Long id;
+    @Id
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
 
-    public Long getId() {
-        return id;
-    }
 
     public Author(String firstName, String lastName, String email) {
+        this.id = new ObjectId().toString();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getFirstName() {

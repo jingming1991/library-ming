@@ -24,8 +24,8 @@ import static org.junit.Assert.*;
 public class MagazinesServiceImplTest {
 
     private MagazinesServiceImpl magazinesService;
-    private IAuthorDao MockAuthorDao;
-    private IMagazineDao MockMagazineDao;
+    private IAuthorDao mockAuthorDao;
+    private IMagazineDao mockMagazineDao;
     @Autowired
     private IMagazineReader magazineReader;
     @Autowired
@@ -36,11 +36,11 @@ public class MagazinesServiceImplTest {
 
         List<Author> authorList = authorReader.convertAuthorFile("csv/autoren.csv");
 
-        MockAuthorDao = Mockito.mock(IAuthorDao.class);
-        Mockito.when(MockAuthorDao.findByEmailIn(Mockito.anyList()))
+        mockAuthorDao = Mockito.mock(IAuthorDao.class);
+        Mockito.when(mockAuthorDao.findByEmailIn(Mockito.anyList()))
                 .thenReturn(authorList);
-        MockMagazineDao = Mockito.mock(IMagazineDao.class);
-        magazinesService = new MagazinesServiceImpl(magazineReader, MockAuthorDao, MockMagazineDao);
+        mockMagazineDao = Mockito.mock(IMagazineDao.class);
+        magazinesService = new MagazinesServiceImpl(magazineReader, mockAuthorDao, mockMagazineDao);
     }
 
 

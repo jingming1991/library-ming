@@ -1,20 +1,27 @@
 package com.episerver.entity;
 
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDate;
 
+@Document
 public class Magazine extends Book {
-
-    private long id;
+    @Id
+    private String id;
     private LocalDate publishDate;
 
+    public Magazine() {
+        this.id = new ObjectId().toString();
+    }
 
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -1,12 +1,17 @@
 package com.episerver.entity;
 
 
+import org.springframework.data.annotation.Transient;
+
 import java.util.List;
 
 public class Book {
+
+
     private String title;
     private String numberISBN;
     private List<Long> autorIds;
+    @Transient
     private List<String> autorMails;
 
     public String getTitle() {

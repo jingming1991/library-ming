@@ -1,18 +1,24 @@
 package com.episerver.entity;
 
 
-public class NormalBook extends Book {
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-    private long id;
+@Document
+public class NormalBook extends Book {
+    @Id
+    private String id;
     private String summary;
 
-    public long getId() {
+    public NormalBook() {
+        this.id = new ObjectId().toString();
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getSummary() {
         return summary;
