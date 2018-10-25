@@ -22,13 +22,10 @@ public class AuthorCsvReaderTest {
         String file = "csv/autoren.csv";
         List<Author> authors = authorCsvReader.convertAuthorFile(file);
         Assert.assertEquals(6, authors.size());
+        Author author = authors.get(0);
+        Assert.assertEquals("Walter", author.getFirstName());
+        Assert.assertEquals("Paul", author.getLastName());
+        Assert.assertEquals("pr-walter@optivo.de", author.getEmail());
     }
 
-    @Test
-    public void mapFull() {
-    }
-
-    @Test
-    public void mapOne() {
-    }
 }

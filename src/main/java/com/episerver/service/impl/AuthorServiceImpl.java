@@ -14,13 +14,15 @@ import java.util.List;
 @Service
 public class AuthorServiceImpl implements IAuthorService {
 
-    @Autowired
-    @Qualifier("AuthorCsv")
     private IAuthorReader authorReader;
 
-    @Autowired
-    private AuthorDao dao;
+    private AuthorDao authorDao;
 
+    @Autowired
+    public AuthorServiceImpl(@Qualifier("AuthorCsv") IAuthorReader authorReader, AuthorDao authorDao) {
+        this.authorReader = authorReader;
+        this.authorDao = authorDao;
+    }
 
     @Override
     public List<Author> getFromFile(String csvUrl) {
@@ -29,11 +31,16 @@ public class AuthorServiceImpl implements IAuthorService {
 
     @Override
     public boolean saveAll(List<Author> authors) {
-        return false;
+        try {
+            authorDao.saveAll(authors);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public List<Author> findByEmail(String email) {
-        return null;
+        return authorDao.findByEmail(email);
     }
 }

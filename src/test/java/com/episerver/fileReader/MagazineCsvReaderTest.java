@@ -27,17 +27,9 @@ public class MagazineCsvReaderTest {
         Assert.assertEquals(5, magazine.getPublishDate().getMonthValue(), 0.001);
         Assert.assertEquals(21, magazine.getPublishDate().getDayOfMonth(), 0.001);
         Assert.assertEquals(1, magazine.getAuthorMails().size());
+        Assert.assertEquals(0, magazine.getAuthorIds().size());
         Assert.assertEquals("pr-walter@optivo.de", magazine.getAuthorMails().get(0));
         Assert.assertEquals("Schöner kochen", magazine.getTitle());
         Assert.assertEquals("5454-5587-3210", magazine.getNumberISBN());
-    }
-
-    @Test
-    public void mapFull() {
-    }
-
-    @Test
-    public void mapOne() {
-
     }
 }
