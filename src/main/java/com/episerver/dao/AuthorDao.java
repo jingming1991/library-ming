@@ -9,5 +9,8 @@ import java.util.List;
 public interface AuthorDao extends PagingAndSortingRepository<Author, String> {
 
     List<Author> findByEmailIn(List<String> mailList);
-    
+
+
+    List<Author> findByEmail(String mail);
+
 }

@@ -74,10 +74,10 @@ public class MagazineServiceImpl implements IMagazineService {
     }
 
     @Override
-    public List<Magazine> findByAutorIds(String authorId) {
-        magazineDao.findByAutorIds(authorId);
+    public List<Magazine> findByAuthorIds(String authorId) {
         return null;
     }
+
 
     @Override
     public List<Magazine> findByNumberISBN(String numberISBN) {

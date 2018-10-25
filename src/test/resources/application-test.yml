@@ -1,0 +1,3 @@
+mongo:
+  host: localhost:12345
+  dbName: librarySystem_test

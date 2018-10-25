@@ -26,4 +26,14 @@ public class AuthorServiceImpl implements IAuthorService {
     public List<Author> getFromFile(String csvUrl) {
         return authorReader.convertAuthorFile(csvUrl);
     }
+
+    @Override
+    public boolean saveAll(List<Author> authors) {
+        return false;
+    }
+
+    @Override
+    public List<Author> findByEmail(String email) {
+        return null;
+    }
 }
