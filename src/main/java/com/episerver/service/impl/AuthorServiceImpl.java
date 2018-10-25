@@ -43,4 +43,14 @@ public class AuthorServiceImpl implements IAuthorService {
     public List<Author> findByEmail(String email) {
         return authorDao.findByEmail(email);
     }
+
+    @Override
+    public boolean deleteAll() {
+        try {
+            authorDao.deleteAll();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

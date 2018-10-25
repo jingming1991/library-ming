@@ -10,4 +10,6 @@ public interface MagazineDao extends PagingAndSortingRepository<Magazine, String
     List<Magazine> findByNumberISBN(String numberISBN);
 
     List<Magazine> findByAuthorIds(String authorId);
+
+    List<Magazine> findByAuthorIdsIn(List<String> authorId);
 }

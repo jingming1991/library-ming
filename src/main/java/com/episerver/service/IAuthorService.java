@@ -11,4 +11,6 @@ public interface IAuthorService {
     boolean saveAll(List<Author> authors);
 
     List<Author> findByEmail(String email);
+
+    boolean deleteAll();
 }

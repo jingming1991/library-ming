@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,6 +23,7 @@ public class MagazineDaoTest extends BaseDaoTest {
 
     @Before
     public void setUp() {
+        cleanAuthorTable();
         cleanMagazineTable();
         initializeAuthor();
         initializeMagazine();
@@ -78,4 +80,19 @@ public class MagazineDaoTest extends BaseDaoTest {
         Assert.assertTrue(isbns.contains("2547-8548-2541"));
         Assert.assertTrue(isbns.contains("5454-5587-3210"));
     }
+
+
+    @Test
+    public void findByAuthorIdsIn() {
+        Author karl = authorDao.findByEmail("pr-gustafsson@optivo.de").get(0);
+        Author paul = authorDao.findByEmail("pr-walter@optivo.de").get(0);
+        List<Magazine> magazines = magazineDao.findByAuthorIdsIn(Arrays.asList(karl.getId(), paul.getId()));
+        Assert.assertEquals(4, magazines.size());
+        List<String> isbns = magazines.stream().map(Magazine::getNumberISBN).collect(Collectors.toList());
+        Assert.assertTrue(isbns.contains("2365-5632-7854"));
+        Assert.assertTrue(isbns.contains("2547-8548-2541"));
+        Assert.assertTrue(isbns.contains("5454-5587-3210"));
+        Assert.assertTrue(isbns.contains("1313-4545-8875"));
+    }
+
 }

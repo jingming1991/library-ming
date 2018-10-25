@@ -3,6 +3,7 @@ package com.episerver.mongo;
 
 import com.episerver.dao.AuthorDao;
 import com.episerver.dao.MagazineDao;
+import com.episerver.dao.NormalBookDao;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.WriteConcern;
@@ -56,4 +57,11 @@ public class MongoFactory {
     public MagazineDao magazineDao(@Qualifier("MongoRepositoryFactory") MongoRepositoryFactory factory) {
         return factory.getRepository(MagazineDao.class);
     }
+
+
+    @Bean
+    public NormalBookDao normalBookDao(@Qualifier("MongoRepositoryFactory") MongoRepositoryFactory factory) {
+        return factory.getRepository(NormalBookDao.class);
+    }
+
 }

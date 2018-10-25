@@ -5,6 +5,8 @@ import com.episerver.dao.AuthorDao;
 import com.episerver.dao.MagazineDao;
 import com.episerver.entity.Author;
 import com.episerver.entity.Magazine;
+import com.episerver.entity.vo.BookVo;
+import com.episerver.entity.vo.BookeType;
 import com.episerver.fileReader.IMagazineReader;
 import com.episerver.service.IMagazineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -69,18 +72,67 @@ public class MagazineServiceImpl implements IMagazineService {
 
     @Override
     public List<Magazine> findAll() {
-        Iterable<Magazine> title = magazineDao.findAll(Sort.by(Sort.Direction.ASC, "title"));
-        return StreamSupport.stream(title.spliterator(), false).collect(Collectors.toList());
+        Iterable<Magazine> all = magazineDao.findAll(Sort.by(Sort.Direction.ASC, "title"));
+        return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
     public List<Magazine> findByAuthorIds(String authorId) {
-        return null;
+        return magazineDao.findByAuthorIds(authorId);
+    }
+
+    @Override
+    public List<Magazine> findByAuthorIds(List<String> authorIds) {
+        return magazineDao.findByAuthorIdsIn(authorIds);
     }
 
 
     @Override
     public List<Magazine> findByNumberISBN(String numberISBN) {
         return magazineDao.findByNumberISBN(numberISBN);
+    }
+
+    @Override
+    public List<BookVo> convertToBookVo(List<Magazine> magazines) {
+        List<BookVo> bookVoList = new ArrayList<>();
+
+        List<String> authorIds = magazines.stream().flatMap(n -> n.getAuthorIds().stream())
+                .distinct().collect(Collectors.toList());
+
+        List<Author> authors = authorDao.findByIdIn(authorIds);
+
+        Map<String, Author> authorsMap = authors.stream().collect(Collectors.toMap(Author::getId, Function.identity()));
+
+        for (Magazine magazine : magazines) {
+            String title = magazine.getTitle();
+            String numberISBN = magazine.getNumberISBN();
+            String publishDate = magazine.getPublishDate().toString();
+            List<String> bookAuthorIds = magazine.getAuthorIds();
+
+            bookAuthorIds.forEach(id -> {
+                BookVo bookVo = new BookVo();
+                bookVo.setBookeType(BookeType.MAGAZINE);
+                bookVo.setTitle(title);
+                bookVo.setNumberISBN(numberISBN);
+                bookVo.setPublishDate(publishDate);
+                Author author = authorsMap.get(id);
+                String email = author.getEmail();
+                bookVo.setEmail(email);
+                String name = author.getFirstName() + "." + author.getLastName();
+                bookVo.setAuthorName(name);
+                bookVoList.add(bookVo);
+            });
+        }
+        return bookVoList;
+    }
+
+    @Override
+    public boolean deleteAll() {
+        try {
+            magazineDao.deleteAll();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }

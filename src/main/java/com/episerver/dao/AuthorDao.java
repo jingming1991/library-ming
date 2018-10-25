@@ -14,6 +14,9 @@ public interface AuthorDao extends PagingAndSortingRepository<Author, String> {
     List<Author> findByEmail(String mail);
 
 
-    List<Author> findByFirstNameAndLastName(String firstName,String lastName);
+    List<Author> findByFirstNameAndLastName(String firstName, String lastName);
+
+
+    List<Author> findByIdIn(List<String> authorIds);
 
 }
