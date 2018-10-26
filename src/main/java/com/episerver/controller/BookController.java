@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,6 +52,15 @@ public class BookController {
         List<Magazine> magazines = magazineService.findByNumberISBN(numberISBN);
         List<NormalBook> normalBooks = normalBookService.findByNumberISBN(numberISBN);
         return combineBooks(magazines, normalBooks);
+    }
+
+    @GetMapping(value = "/sort/{sort}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookVo> findBySort(@PathVariable String sort) {
+        List<Magazine> magazines = magazineService.findAllBySort(sort);
+        List<NormalBook> normalBooks = normalBookService.findAllBySort(sort);
+        List<BookVo> bookVos = combineBooks(magazines, normalBooks);
+        return bookVos.stream().sorted(Comparator.comparing(BookVo::getTitle)).collect(Collectors.toList());
     }
 
     private List<BookVo> combineBooks(List<Magazine> magazines, List<NormalBook> normalBooks) {

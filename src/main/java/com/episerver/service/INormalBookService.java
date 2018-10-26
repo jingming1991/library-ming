@@ -13,7 +13,7 @@ public interface INormalBookService {
 
     List<NormalBook> findAll();
 
-    List<NormalBook> findByAuthorIds(String authorId);
+    List<NormalBook> findAllBySort(String sort);
 
     List<NormalBook> findByAuthorIds(List<String> authorIds);
 

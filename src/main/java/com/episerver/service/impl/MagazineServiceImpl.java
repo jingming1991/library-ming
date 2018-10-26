@@ -5,6 +5,7 @@ import com.episerver.dao.AuthorDao;
 import com.episerver.dao.MagazineDao;
 import com.episerver.entity.Author;
 import com.episerver.entity.Magazine;
+import com.episerver.entity.SortType;
 import com.episerver.entity.vo.BookVo;
 import com.episerver.entity.vo.BookeType;
 import com.episerver.fileReader.IMagazineReader;
@@ -77,8 +78,21 @@ public class MagazineServiceImpl implements IMagazineService {
     }
 
     @Override
-    public List<Magazine> findByAuthorIds(String authorId) {
-        return magazineDao.findByAuthorIds(authorId);
+    public List<Magazine> findAllBySort(String sort) {
+        SortType sortType = findSortType(sort);
+        if (sortType == null) {
+            return findAll();
+        }
+        Iterable<Magazine> all = magazineDao.findAll(Sort.by(Sort.Direction.ASC, sort));
+        return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
+    }
+
+    public SortType findSortType(String sort) {
+        try {
+            return SortType.valueOf(sort.toUpperCase());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

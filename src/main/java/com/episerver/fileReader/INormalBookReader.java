@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface INormalBookReader {
 
-    List<NormalBook> convertMagazineFile(String fileUrl);
+    List<NormalBook> convertNormalBookFile(String fileUrl);
 }

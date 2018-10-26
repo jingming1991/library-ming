@@ -27,11 +27,7 @@ public class MagazineDaoTest extends BaseDaoTest {
         initializeMagazine();
     }
 
-    private void initializeMagazine() {
-        List<Magazine> magazineList = magazineReader.convertMagazineFile("csv/zeitschriften.csv");
-        magazineList.forEach(m -> m.setAuthorIds(authorDao.findByEmailIn(m.getAuthorMails()).stream().map(Author::getId).collect(Collectors.toList())));
-        magazineDao.saveAll(magazineList);
-    }
+
 
     @Test
     public void findAll() {

@@ -5,6 +5,7 @@ import com.episerver.dao.AuthorDao;
 import com.episerver.dao.NormalBookDao;
 import com.episerver.entity.Author;
 import com.episerver.entity.NormalBook;
+import com.episerver.entity.SortType;
 import com.episerver.entity.vo.BookVo;
 import com.episerver.entity.vo.BookeType;
 import com.episerver.fileReader.INormalBookReader;
@@ -39,7 +40,7 @@ public class NormalBookServiceImpl implements INormalBookService {
 
     @Override
     public List<NormalBook> getFromFile(String fileUrl) {
-        List<NormalBook> normalBooks = normalBookReader.convertMagazineFile(fileUrl);
+        List<NormalBook> normalBooks = normalBookReader.convertNormalBookFile(fileUrl);
 
         List<String> emails = normalBooks.stream()
                 .flatMap(m -> m.getAuthorMails().stream()).collect(Collectors.toList());
@@ -77,9 +78,23 @@ public class NormalBookServiceImpl implements INormalBookService {
     }
 
     @Override
-    public List<NormalBook> findByAuthorIds(String authorId) {
-        return normalBookDao.findByAuthorIds(authorId);
+    public List<NormalBook> findAllBySort(String sort) {
+        SortType sortType = findSortType(sort);
+        if (sortType == null) {
+            return findAll();
+        }
+        Iterable<NormalBook> all = normalBookDao.findAll(Sort.by(Sort.Direction.ASC, sort));
+        return StreamSupport.stream(all.spliterator(), false).collect(Collectors.toList());
     }
+
+    public SortType findSortType(String sort) {
+        try {
+            return SortType.valueOf(sort.toUpperCase());
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 
     @Override
     public List<NormalBook> findByAuthorIds(List<String> authorIds) {

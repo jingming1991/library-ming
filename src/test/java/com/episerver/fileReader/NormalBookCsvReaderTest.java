@@ -20,7 +20,7 @@ public class NormalBookCsvReaderTest {
     @Test
     public void convertMagazineFile() {
         String file = "csv/buecher.csv";
-        List<NormalBook> normalBooks = normalBookCsvReader.convertMagazineFile(file);
+        List<NormalBook> normalBooks = normalBookCsvReader.convertNormalBookFile(file);
         Assert.assertEquals(8, normalBooks.size());
         NormalBook normalBook = normalBooks.get(0);
         Assert.assertEquals("Ich helf dir kochen. Das erfolgreiche Universalkochbuch mit großem Backteil", normalBook.getTitle());
@@ -28,7 +28,5 @@ public class NormalBookCsvReaderTest {
         Assert.assertNotNull(normalBook.getSummary());
         Assert.assertEquals(1, normalBook.getAuthorMails().size());
         Assert.assertEquals(1, normalBook.getAuthorMails().size());
-
     }
-
 }

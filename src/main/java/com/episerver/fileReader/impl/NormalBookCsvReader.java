@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class NormalBookCsvReader extends BaseReader implements INormalBookReader {
 
     @Override
-    public List<NormalBook> convertMagazineFile(String fileUrl) {
+    public List<NormalBook> convertNormalBookFile(String fileUrl) {
         List<NormalBook> results;
         try {
             List<String> stringList = getLines(fileUrl);

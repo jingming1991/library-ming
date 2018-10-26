@@ -1,6 +1,7 @@
 package com.episerver.fileReader;
 
 import com.episerver.entity.Author;
+import com.episerver.entity.SortType;
 import com.episerver.fileReader.impl.AuthorCsvReader;
 import org.junit.Assert;
 import org.junit.Before;

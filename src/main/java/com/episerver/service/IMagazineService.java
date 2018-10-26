@@ -1,7 +1,6 @@
 package com.episerver.service;
 
 import com.episerver.entity.Magazine;
-import com.episerver.entity.NormalBook;
 import com.episerver.entity.vo.BookVo;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface IMagazineService {
 
     List<Magazine> findAll();
 
-    List<Magazine> findByAuthorIds(String authorId);
+    List<Magazine> findAllBySort(String sort);
 
     List<Magazine> findByAuthorIds(List<String> authorIds);
 
