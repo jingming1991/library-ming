@@ -13,9 +13,12 @@ public class Author {
     private String lastName;
     private String email;
 
+    public Author() {
+        this.id = new ObjectId().toString();
+    }
 
     public Author(String firstName, String lastName, String email) {
-        this.id = new ObjectId().toString();
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -1,7 +1,5 @@
 package com.episerver.entity.vo;
 
-import java.time.LocalDate;
-
 public class BookVo {
 
     private String title;
@@ -16,6 +14,9 @@ public class BookVo {
     //Hidden
     private String authorId;
     private String bookId;
+
+    public BookVo() {
+    }
 
     public String getTitle() {
         return title;
