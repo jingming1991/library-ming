@@ -2,7 +2,6 @@ package com.episerver.dao;
 
 import com.episerver.entity.Author;
 import com.episerver.entity.Magazine;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -7,6 +7,8 @@ import com.episerver.entity.vo.BookVo;
 import com.episerver.service.IAuthorService;
 import com.episerver.service.IMagazineService;
 import com.episerver.service.INormalBookService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,7 @@ public class BookController {
     @Autowired
     private INormalBookService normalBookService;
 
+    @ApiOperation(value = "findAll", notes = "find all normal books and magazines")
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<BookVo> findAll() {
@@ -36,6 +39,8 @@ public class BookController {
         return combineBooks(magazines, normalBooks);
     }
 
+    @ApiOperation(value = "findByEmail", notes = "show all books according to author's email")
+    @ApiImplicitParam(name = "email", value = "email", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/authors/email/{email}")
     @ResponseStatus(HttpStatus.OK)
     public List<BookVo> findByEmail(@PathVariable String email) {
@@ -43,9 +48,13 @@ public class BookController {
         List<String> authorIds = authorList.stream().map(Author::getId).collect(Collectors.toList());
         List<Magazine> magazines = magazineService.findByAuthorIds(authorIds);
         List<NormalBook> normalBooks = normalBookService.findByAuthorIds(authorIds);
-        return combineBooks(magazines, normalBooks);
+        List<BookVo> bookVoList = combineBooks(magazines, normalBooks);
+        return bookVoList.stream().filter(b -> email.equals(b.getEmail())).collect(Collectors.toList());
     }
 
+
+    @ApiOperation(value = "findByNumberISBN", notes = "display the book by given ISBN number")
+    @ApiImplicitParam(name = "isbn", value = "isbn number", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/isbn/{isbn}")
     @ResponseStatus(HttpStatus.OK)
     public List<BookVo> findByNumberISBN(@PathVariable(value = "isbn") String numberISBN) {
@@ -54,6 +63,8 @@ public class BookController {
         return combineBooks(magazines, normalBooks);
     }
 
+    @ApiOperation(value = "findBySort", notes = "show all books sorted by given sortType")
+    @ApiImplicitParam(name = "sort", value = "sortType", required = true, dataType = "String", paramType = "path")
     @GetMapping(value = "/sort/{sort}")
     @ResponseStatus(HttpStatus.OK)
     public List<BookVo> findBySort(@PathVariable String sort) {
